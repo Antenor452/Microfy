@@ -1,7 +1,7 @@
 import React from "react";
 
 const Header = () => {
-  return <h3 className="text-center ">Micrh3 className=""</h3>;
+  return <h3 className="text-center ">Microfy</h3>;
 };
 
 export default Header;
