@@ -2,12 +2,7 @@ import React from "react";
 import "./Style.css";
 
 const ModalForm = (props) => {
-  const { showModal, type } = props;
-  console.log(
-    showModal
-      ? "container container-modal d-block"
-      : "container container-modal d-none"
-  );
+  const { showModal } = props;
   return (
     <>
       <div

@@ -15,14 +15,16 @@ const App = () => {
   }, []);
   return (
     <React.Fragment>
-      <Router>
-        <Routes>
-          <Route
-            path="/"
-            element={isSignedIn ? <HomePage /> : <GuestHomePage />}
-          />
-        </Routes>
-      </Router>
+      <div className="container-fluid">
+        <Router>
+          <Routes>
+            <Route
+              path="/"
+              element={isSignedIn ? <HomePage /> : <GuestHomePage />}
+            />
+          </Routes>
+        </Router>
+      </div>
     </React.Fragment>
   );
 };

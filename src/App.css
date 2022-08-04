@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+.guest-container {
+  border: 1px solid green;
+}
+
 .align-center {
   width: 100%;
   position: absolute;
@@ -16,6 +20,20 @@
 }
 .url-input::placeholder {
   text-align: center;
+}
+
+.container-list {
+  width: fit-content;
+  text-align: start;
+}
+.container-list ul {
+  list-style: none;
+}
+.container-list ul li {
+  padding-left: 0.3rem;
+}
+.container-list ul li:before {
+  content: "✓";
 }
 
 .btn-microfy {
