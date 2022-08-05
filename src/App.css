@@ -40,6 +40,14 @@
   color: #fff;
   background-color: #db0944;
 }
+.btn-microfy:hover {
+  color: #db0944;
+  background-color: #fff;
+}
+.btn-microfy:active {
+  color: #db0944;
+  background-color: #fff;
+}
 .btn-login {
   color: #fff;
   background-color: green;

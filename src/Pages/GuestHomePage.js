@@ -36,7 +36,7 @@ const GuestHomePage = () => {
             </div>
           </h6>
           <div className="container d-flex justify-content-center ">
-            <button className="btn btn-login me-2" onClick={() => {}}>
+            <button className=" btn-login me-2" onClick={() => {}}>
               Create Free Account
             </button>
           </div>
