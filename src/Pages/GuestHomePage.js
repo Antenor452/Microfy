@@ -3,6 +3,7 @@ import ModalForm from "../Components/ModalForm";
 import UrlForm from "../Components/UrlForm";
 import { db } from "../HelperFiles/firebaseSetup";
 import { doc, setDoc } from "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
 
 const GuestHomePage = () => {
   const [url, setUrl] = useState("http://");
@@ -11,7 +12,9 @@ const GuestHomePage = () => {
     setUrl(e.target.value);
   };
 
-  const onSubmit = () => {};
+  const onSubmit = async () => {
+    console.log(uuidv4());
+  };
 
   return (
     <>

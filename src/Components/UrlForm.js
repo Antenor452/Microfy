@@ -18,7 +18,11 @@ const UrlForm = (props) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(validateUrl());
+    if (validateUrl()) {
+      onSubmit();
+    } else {
+      console.log("error");
+    }
   };
   return (
     <>
