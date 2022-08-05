@@ -4,6 +4,8 @@ import "./App.css";
 import Header from "./Components/Header";
 import GuestHomePage from "./Pages/GuestHomePage";
 import HomePage from "./Pages/HomePage";
+import Redirect from "./Pages/Redirect";
+import Error from "./Pages/Error";
 const App = () => {
   const [isSignedIn, setIsSignedIn] = useState(null);
   useEffect(() => {
@@ -22,6 +24,8 @@ const App = () => {
               path="/"
               element={isSignedIn ? <HomePage /> : <GuestHomePage />}
             />
+            <Route path="/microfy-:uid" element={<Redirect />} />
+            <Route path="*" element={<Error />} />
           </Routes>
         </Router>
       </div>

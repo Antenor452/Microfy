@@ -13,7 +13,13 @@ const GuestHomePage = () => {
   };
 
   const onSubmit = async () => {
-    console.log(uuidv4());
+    const uid = uuidv4();
+    const response = await setDoc(doc(db, "GuestLinks", uid), {
+      uid: uid,
+      url: url,
+      visits: 0,
+    });
+    console.log(response);
   };
 
   return (
