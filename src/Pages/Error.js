@@ -28,7 +28,7 @@ const Error = () => {
                   removed
                 </p>
               </div>
-              <button className="btn mt-3 " onClick={backToHome}>
+              <button className="btn btn-home mt-3 " onClick={backToHome}>
                 Back to homepage
               </button>
             </div>

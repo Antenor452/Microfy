@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ModalForm from "../Components/ModalForm";
 import UrlForm from "../Components/UrlForm";
 import { db } from "../HelperFiles/firebaseSetup";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, addDoc, collection } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 
 const GuestHomePage = () => {
@@ -14,12 +14,15 @@ const GuestHomePage = () => {
 
   const onSubmit = async () => {
     const uid = uuidv4();
-    const response = await setDoc(doc(db, "GuestLinks", uid), {
-      uid: uid,
-      url: url,
-      visits: 0,
-    });
-    console.log(response);
+    try {
+      const docRef = await addDoc(collection(db, "GuestLinks"), {
+        uid: uid,
+        url: url,
+        visitCount: 0,
+      });
+    } catch (e) {
+      console.log("error adding doc");
+    }
   };
 
   return (
