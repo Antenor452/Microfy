@@ -24,7 +24,7 @@ const App = () => {
               path="/"
               element={isSignedIn ? <HomePage /> : <GuestHomePage />}
             />
-            <Route path="/microfy-:uid" element={<Redirect />} />
+            <Route path="/guest-:uid" element={<Redirect />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </Router>

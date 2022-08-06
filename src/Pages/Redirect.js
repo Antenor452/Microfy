@@ -1,28 +1,40 @@
 import React, { useEffect } from "react";
 import { db } from "../HelperFiles/firebaseSetup";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  collection,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Redirect = () => {
-  const uid = useParams();
+  const params = useParams();
   const navigate = useNavigate();
   const getLinkInfo = async () => {
     const guestLinksRef = collection(db, "GuestLinks");
-    const q = query(guestLinksRef, where("visitCount", "==", 0));
+    const q = query(guestLinksRef, where("uid", "==", params.uid));
 
     const querySnapshot = await getDocs(q);
     if (querySnapshot.size === 0) {
       navigate("/error");
     } else {
       const linkData = querySnapshot.docs[0].data();
+      const docId = querySnapshot.docs[0].id;
       const { uid, url, visits } = linkData;
+      const docRef = doc(db, "GuestLinks", docId);
+      await updateDoc(docRef, {
+        visits: visits + 1,
+      });
       window.open(url);
     }
     console.log(querySnapshot.size);
     console.log(querySnapshot.docs[0].data());
   };
   useEffect(() => {
-    console.log(uid);
+    console.log(params.uid);
     getLinkInfo();
   }, []);
   return <div>Redirect</div>;
