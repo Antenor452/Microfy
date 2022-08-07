@@ -36,7 +36,7 @@ const Redirect = () => {
   useEffect(() => {
     console.log(params.uid);
     getLinkInfo();
-  }, [params.uid]);
+  }, []);
   return (
     <>
       <div className="container">
