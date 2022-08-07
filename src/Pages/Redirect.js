@@ -23,7 +23,7 @@ const Redirect = () => {
     } else {
       const linkData = querySnapshot.docs[0].data();
       const docId = querySnapshot.docs[0].id;
-      const { uid, url, visits } = linkData;
+      const { url, visits } = linkData;
       const docRef = doc(db, "GuestLinks", docId);
       await updateDoc(docRef, {
         visits: visits + 1,

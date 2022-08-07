@@ -17,7 +17,7 @@ const GuestHomePage = () => {
   const onSubmit = async () => {
     const uid = uuidv4();
     try {
-      const docRef = await addDoc(collection(db, "GuestLinks"), {
+      await addDoc(collection(db, "GuestLinks"), {
         uid: uid,
         url: url,
         visits: 0,

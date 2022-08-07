@@ -17,7 +17,7 @@ const Error = () => {
               <img
                 src={require("../Images/Scarecrow.png")}
                 className="img-fluid scare"
-                alt="Error 404 Image"
+                alt="Error 404"
               />
             </div>
 
