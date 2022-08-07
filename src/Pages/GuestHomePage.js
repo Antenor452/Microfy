@@ -8,6 +8,7 @@ import CopyToClipboard from "../Components/CopyToClipboard";
 
 const GuestHomePage = () => {
   const [url, setUrl] = useState("http://");
+  const [microUrl, setMicroUrl] = useState(null);
   const [showLink, setShowLink] = useState(false);
 
   const onChangeHandler = (e) => {
@@ -23,6 +24,7 @@ const GuestHomePage = () => {
         visits: 0,
       }).then(() => {
         const microUrl = window.location.href + "guest-" + uid;
+        setMicroUrl(microUrl);
         setShowLink(true);
       });
     } catch (e) {
@@ -41,7 +43,7 @@ const GuestHomePage = () => {
               onSubmit={onSubmit}
             />
           </div>
-          {showLink ? <CopyToClipboard /> : null}
+          {showLink ? <CopyToClipboard urlLink={microUrl} /> : null}
 
           <h6 className="text-center mb-2">
             Create an account to enjoy :
