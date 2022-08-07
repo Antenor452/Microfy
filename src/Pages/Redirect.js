@@ -28,7 +28,7 @@ const Redirect = () => {
       await updateDoc(docRef, {
         visits: visits + 1,
       });
-      window.open(url);
+      window.open(url, "_self");
     }
     console.log(querySnapshot.size);
     console.log(querySnapshot.docs[0].data());
@@ -37,7 +37,17 @@ const Redirect = () => {
     console.log(params.uid);
     getLinkInfo();
   }, []);
-  return <div>Redirect</div>;
+  return (
+    <>
+      <div className="container">
+        <div className="row  mt-5">
+          <div className="col-12">
+            <h4 className="text-center">Redirecting ...</h4>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Redirect;

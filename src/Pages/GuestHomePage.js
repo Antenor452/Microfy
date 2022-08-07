@@ -4,9 +4,11 @@ import UrlForm from "../Components/UrlForm";
 import { db } from "../HelperFiles/firebaseSetup";
 import { doc, addDoc, collection } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
+import CopyToClipboard from "../Components/CopyToClipboard";
 
 const GuestHomePage = () => {
   const [url, setUrl] = useState("http://");
+  const [showLink, setShowLink] = useState(false);
 
   const onChangeHandler = (e) => {
     setUrl(e.target.value);
@@ -18,7 +20,10 @@ const GuestHomePage = () => {
       const docRef = await addDoc(collection(db, "GuestLinks"), {
         uid: uid,
         url: url,
-        visitCount: 0,
+        visits: 0,
+      }).then(() => {
+        const microUrl = window.location.href + "guest-" + uid;
+        setShowLink(true);
       });
     } catch (e) {
       console.log("error adding doc");
@@ -36,6 +41,7 @@ const GuestHomePage = () => {
               onSubmit={onSubmit}
             />
           </div>
+          {showLink ? <CopyToClipboard /> : null}
 
           <h6 className="text-center mb-2">
             Create an account to enjoy :
