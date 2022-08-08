@@ -1,7 +1,9 @@
+import { useState } from "react";
 import React from "react";
 
 const UrlForm = (props) => {
   const { url, onChangeHandler, onSubmit } = props;
+  const [error, setError] = useState(false);
 
   const validateUrl = () => {
     var urlPattern = new RegExp(
@@ -19,9 +21,10 @@ const UrlForm = (props) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (validateUrl()) {
+      setError(false);
       onSubmit();
     } else {
-      console.log("error");
+      setError(true);
     }
   };
   return (
@@ -39,6 +42,9 @@ const UrlForm = (props) => {
             Microfy
           </button>
         </div>
+        {error ? (
+          <h5 className="text-center text-danger">Please enter a valid url</h5>
+        ) : null}
       </form>
     </>
   );

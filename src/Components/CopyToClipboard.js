@@ -19,7 +19,9 @@ const CopyToClipboard = (props) => {
               className="form-control"
               readOnly
             />
-            <button onClick={CopyClipboard}>{copyStat}</button>
+            <button className="btn btn-primary" onClick={CopyClipboard}>
+              {copyStat}
+            </button>
           </div>
         </div>
       </div>
