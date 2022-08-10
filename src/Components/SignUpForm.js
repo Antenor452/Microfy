@@ -1,30 +1,41 @@
 import React, { useState } from "react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const SignUpForm = () => {
+  const initFormState = {
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
+  const [formState, setFormState] = useState(initFormState);
   return (
     <>
-      <div className="container ">
-        <form>
+      <form>
+        <div className="form-group">
+          <label htmlFor="email">Email address</label>
           <input
+            type="email"
             className="form-control"
-            type="text"
-            placeholder="Please enter your email"
-            value={email}
+            id="email"
+            value={formState.email}
           />
-          <input
-            className="form-control"
-            type="password"
-            placeholder="Please enter your password"
-            value={password}
-          />
-          <input
-            className="form-control"
-            type="password"
-            placeholder="Please confirm ypur password"
-            value={ConfirmPassword}
-          />
-        </form>
-      </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <div className="input-group">
+            <input
+              type="password"
+              className="form-control"
+              value={formState.password}
+            />
+            <span className="input-group-text">
+              <button className="btn-show-pass">
+                <AiFillEye />
+              </button>
+            </span>
+          </div>
+        </div>
+      </form>
     </>
   );
 };

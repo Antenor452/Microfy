@@ -1,9 +1,28 @@
 import React from "react";
 import "../styling/modalstyling.css";
-const ModalForm = () => {
+import SignUpForm from "./SignUpForm";
+import SignInForm from "./SignInForm";
+const ModalForm = (props) => {
+  const type = props.type;
+
+  const FormType = (props) => {
+    if (type === "SIGN_UP") {
+      return <SignUpForm />;
+    }
+    if (type === "SIGN_IN") {
+      return <SignInForm />;
+    }
+    return "Error :no type selected";
+  };
+
   return (
     <>
-      <div className="container-fluid">Modal</div>
+      <div className="container d-flex justify-content-center align-items-center">
+        <div className="container-fluid modal-container"></div>
+        <div className="container form-container d-flex justify-content-center p-2">
+          {<FormType />}
+        </div>
+      </div>
     </>
   );
 };

@@ -67,7 +67,7 @@ const GuestHomePage = () => {
                 setModalStatus({
                   ...modalStatus,
                   showModal: true,
-                  type: "SIGN_IN",
+                  type: "SIGN_UP",
                 });
               }}
             >

@@ -1,0 +1,19 @@
+.modal-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.form-container {
+  background-color: aliceblue;
+  width: 80%;
+  z-index: 2;
+}
+
+.form-container form {
+  width: 80%;
+}
