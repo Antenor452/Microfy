@@ -1,9 +1,9 @@
-import { useState } from "react";
-import React from "react";
+import React, { useState, useRef } from "react";
 
 const UrlForm = (props) => {
   const { url, onChangeHandler, onSubmit } = props;
   const [error, setError] = useState(false);
+  const inputRef = useRef(null);
 
   const validateUrl = () => {
     var urlPattern = new RegExp(
@@ -25,6 +25,7 @@ const UrlForm = (props) => {
       onSubmit();
     } else {
       setError(true);
+      inputRef.current.focus();
     }
   };
   return (
@@ -35,6 +36,7 @@ const UrlForm = (props) => {
             className="form-control url-input"
             type="url"
             value={url}
+            ref={inputRef}
             onChange={(e) => onChangeHandler(e)}
             placeholder="Enter valid url to microfy"
           />
