@@ -4,11 +4,17 @@ import { db } from "../HelperFiles/firebaseSetup";
 import { addDoc, collection } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 import CopyToClipboard from "../Components/CopyToClipboard";
+import ModalForm from "../Components/ModalForm";
 
 const GuestHomePage = () => {
   const [url, setUrl] = useState("http://");
   const [microUrl, setMicroUrl] = useState(null);
   const [showLink, setShowLink] = useState(false);
+  const modalInit = {
+    showModal: false,
+    type: "",
+  };
+  const [modalStatus, setModalStatus] = useState(modalInit);
 
   const onChangeHandler = (e) => {
     setUrl(e.target.value);
@@ -55,12 +61,22 @@ const GuestHomePage = () => {
             </div>
           </h6>
           <div className="container d-flex justify-content-center ">
-            <button className=" btn-login me-2" onClick={() => {}}>
+            <button
+              className="btn btn-success me-2"
+              onClick={() => {
+                setModalStatus({
+                  ...modalStatus,
+                  showModal: true,
+                  type: "SIGN_IN",
+                });
+              }}
+            >
               Create Free Account
             </button>
           </div>
         </div>
       </div>
+      {modalStatus.showModal ? <ModalForm type={modalStatus.type} /> : null}
     </>
   );
 };

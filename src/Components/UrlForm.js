@@ -28,6 +28,7 @@ const UrlForm = (props) => {
       inputRef.current.focus();
     }
   };
+
   return (
     <>
       <form className="url-input-form ">
