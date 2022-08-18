@@ -18,13 +18,13 @@ const ModalForm = (props) => {
 
   return (
     <>
-      <div
-        className="container d-flex justify-content-center align-items-center"
-        onClick={() => {
-          closeModal();
-        }}
-      >
-        <div className="container-fluid modal-container"></div>
+      <div className="container d-flex justify-content-center align-items-center">
+        <div
+          className="container-fluid modal-container"
+          onClick={() => {
+            closeModal();
+          }}
+        ></div>
         <div className="container form-container d-flex justify-content-center p-2">
           {<FormType />}
         </div>
