@@ -3,6 +3,7 @@ import UrlForm from "../Components/UrlForm";
 import { db } from "../HelperFiles/firebaseSetup";
 import { addDoc, collection } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
+import shortUUID from "short-uuid";
 import CopyToClipboard from "../Components/CopyToClipboard";
 import ModalForm from "../Components/ModalForm";
 
@@ -21,14 +22,14 @@ const GuestHomePage = () => {
 
   const onChangeHandler = (e) => {
     setUrl(e.target.value);
+    setShowLink(false);
   };
 
   const onSubmit = async () => {
-    const uid = uuidv4();
+    const uid = shortUUID.uuid();
     try {
       await addDoc(collection(db, "GuestLinks"), {
-        uid: uid,
-        url: url,
+        url: uid,
         visits: 0,
       }).then(() => {
         const microUrl = window.location.href + "guest-" + uid;

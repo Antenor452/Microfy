@@ -55,6 +55,10 @@ const SignUpForm = () => {
             </span>
           </div>
         </div>
+
+        <button className="btn btn-primary mt-3 form-control">
+          Create Account
+        </button>
       </form>
     </>
   );
