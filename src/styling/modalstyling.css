@@ -17,3 +17,8 @@
 .form-container form {
   width: 80%;
 }
+
+.form-container form .btn-show-pass {
+  padding: 0;
+  border: none;
+}

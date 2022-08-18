@@ -4,6 +4,7 @@ import SignUpForm from "./SignUpForm";
 import SignInForm from "./SignInForm";
 const ModalForm = (props) => {
   const type = props.type;
+  const closeModal = props.closeModal;
 
   const FormType = (props) => {
     if (type === "SIGN_UP") {
@@ -17,7 +18,12 @@ const ModalForm = (props) => {
 
   return (
     <>
-      <div className="container d-flex justify-content-center align-items-center">
+      <div
+        className="container d-flex justify-content-center align-items-center"
+        onClick={() => {
+          closeModal();
+        }}
+      >
         <div className="container-fluid modal-container"></div>
         <div className="container form-container d-flex justify-content-center p-2">
           {<FormType />}

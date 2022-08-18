@@ -15,6 +15,9 @@ const GuestHomePage = () => {
     type: "",
   };
   const [modalStatus, setModalStatus] = useState(modalInit);
+  const closeModal = () => {
+    setModalStatus({ ...modalStatus, showModal: false });
+  };
 
   const onChangeHandler = (e) => {
     setUrl(e.target.value);
@@ -76,7 +79,9 @@ const GuestHomePage = () => {
           </div>
         </div>
       </div>
-      {modalStatus.showModal ? <ModalForm type={modalStatus.type} /> : null}
+      {modalStatus.showModal ? (
+        <ModalForm type={modalStatus.type} closeModal={closeModal} />
+      ) : null}
     </>
   );
 };

@@ -8,6 +8,19 @@ const SignUpForm = () => {
     confirmPassword: "",
   };
   const [formState, setFormState] = useState(initFormState);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const onChangeHandler = (e) => {
+    setFormState({
+      ...formState,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const toggleShowPassword = (e) => {
+    e.preventDefault();
+    setShowPassword(!showPassword);
+  };
   return (
     <>
       <form>
@@ -17,20 +30,27 @@ const SignUpForm = () => {
             type="email"
             className="form-control"
             id="email"
+            name="email"
             value={formState.email}
+            onChange={(e) => onChangeHandler(e)}
           />
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <div className="input-group">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               className="form-control"
+              name="password"
               value={formState.password}
+              onChange={(e) => onChangeHandler(e)}
             />
             <span className="input-group-text">
-              <button className="btn-show-pass">
-                <AiFillEye />
+              <button
+                className="btn-show-pass"
+                onClick={(e) => toggleShowPassword(e)}
+              >
+                {!showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
               </button>
             </span>
           </div>
