@@ -11,13 +11,14 @@
 .form-container {
   background-color: aliceblue;
   width: 80%;
+  max-width: 500px;
   z-index: 2;
   border-radius: 15px;
 }
 
 .form-container form {
-  padding: 2rem 0;
-  width: 80%;
+  padding: 2rem 0.5rem;
+  width: 100%;
 }
 
 .form-container form .btn-show-pass {
