@@ -9,27 +9,16 @@ const ModalForm = (props) => {
 
   const FormType = () => {
     if (formType === "SIGN_UP") {
-      return <SignUpForm />;
+      return <SignUpForm changeFormType={changeFormType} />;
     }
     if (formType === "SIGN_IN") {
-      return <SignInForm />;
+      return <SignInForm changeFormType={changeFormType} />;
     }
     return "Error :no type selected";
   };
-  const changeFormTypeButton = () => {
-    if (formType === "SIGN_UP") {
-      return <SignUpForm />;
-    }
-    if (formType === "SIGN_IN") {
-      return <SignInForm />;
-    }
-  };
-  const changeFormType = () => {
-    if (formType === "SIGN_UP") {
-      setFormType("SIGN_IN");
-    } else {
-      setFormType("SIGN_UP");
-    }
+
+  const changeFormType = (formType) => {
+    setFormType(formType);
   };
 
   return (

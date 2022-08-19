@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
-const SignInForm = () => {
+const SignInForm = (props) => {
+  const changeFormType = props.changeFormType;
+  const SIGN_UP = "SIGN_UP";
   const initFormState = {
     email: "",
     password: "",
@@ -55,10 +58,15 @@ const SignInForm = () => {
           </div>
         </div>
 
-        <button className="btn btn-primary mt-3 form-control">
+        <button className="btn btn-primary mt-3 form-control">Sign In</button>
+        <button
+          className="btn btn-success mt-3 form-control "
+          onClick={() => {
+            changeFormType(SIGN_UP);
+          }}
+        >
           Create Account
         </button>
-        <button className="btn btn-success mt-3 form-control">Sign In</button>
       </form>
     </>
   );
