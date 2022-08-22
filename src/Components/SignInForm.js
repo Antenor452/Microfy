@@ -26,6 +26,7 @@ const SignInForm = (props) => {
   return (
     <>
       <form>
+        <h5 className="text-center">Sign In</h5>
         <div className="form-group">
           <label htmlFor="email">Email address</label>
           <input

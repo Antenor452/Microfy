@@ -11,7 +11,7 @@ const Error = () => {
     <>
       <main>
         <div className="container vh-100 d-flex align-items-center justify-content-center">
-          <h4 className="ms-lg-5 mt-lg-5">404 not found</h4>
+          <h4 className="ms-lg-5 mt-lg-5 error-h4">404 not found</h4>
           <div className="row mt-lg-0 mt-4 ">
             <div className="col-lg-6 d-flex justify-content-center align-items-center ">
               <img

@@ -8,6 +8,7 @@ const SignUpForm = (props) => {
     email: "",
     password: "",
     confirmPassword: "",
+    username: "",
   };
   const [formState, setFormState] = useState(initFormState);
   const [showPassword, setShowPassword] = useState(false);
@@ -26,6 +27,18 @@ const SignUpForm = (props) => {
   return (
     <>
       <form>
+        <h5>Create New Account</h5>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            className="form-control"
+            id="username"
+            name="username"
+            value={formState.username}
+            onChange={(e) => onChangeHandler(e)}
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="email">Email address</label>
           <input
