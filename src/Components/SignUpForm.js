@@ -27,7 +27,7 @@ const SignUpForm = (props) => {
   return (
     <>
       <form>
-        <h5>Create New Account</h5>
+        <h4 className="text-center">Create New Account</h4>
         <div className="form-group">
           <label htmlFor="username">Username</label>
           <input

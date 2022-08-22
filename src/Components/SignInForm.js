@@ -7,7 +7,6 @@ const SignInForm = (props) => {
   const initFormState = {
     email: "",
     password: "",
-    confirmPassword: "",
   };
   const [formState, setFormState] = useState(initFormState);
   const [showPassword, setShowPassword] = useState(false);
@@ -26,7 +25,7 @@ const SignInForm = (props) => {
   return (
     <>
       <form>
-        <h5 className="text-center">Sign In</h5>
+        <h4 className="text-center">Sign In</h4>
         <div className="form-group">
           <label htmlFor="email">Email address</label>
           <input
@@ -57,6 +56,9 @@ const SignInForm = (props) => {
               </button>
             </span>
           </div>
+        </div>
+        <div className="container mt-2 ">
+          <h6 className="text-end">Forgot Password?</h6>
         </div>
 
         <button className="btn btn-primary mt-3 form-control">Sign In</button>

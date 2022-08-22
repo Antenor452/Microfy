@@ -6,6 +6,11 @@ import { v4 as uuidv4 } from "uuid";
 import shortUUID from "short-uuid";
 import CopyToClipboard from "../Components/CopyToClipboard";
 import ModalForm from "../Components/ModalForm";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 
 const GuestHomePage = () => {
   const [url, setUrl] = useState("http://");
