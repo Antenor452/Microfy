@@ -5,15 +5,18 @@ import GuestHomePage from "./Pages/GuestHomePage";
 import HomePage from "./Pages/HomePage";
 import Redirect from "./Pages/Redirect";
 import Error from "./Pages/Error";
+import { useSelector } from "react-redux";
+
 const App = () => {
+  const logInStatus = useSelector((state) => state.logInStatus.isLoggedIn);
   const [isSignedIn, setIsSignedIn] = useState(null);
   useEffect(() => {
-    const logInStatus = JSON.parse(localStorage.getItem("logInStatus"));
+    console.log(logInStatus);
     if (logInStatus) {
       setIsSignedIn(true);
     }
     setIsSignedIn(false);
-  }, []);
+  }, [logInStatus]);
   return (
     <React.Fragment>
       <div className="container-fluid">

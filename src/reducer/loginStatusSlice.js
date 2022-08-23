@@ -9,6 +9,7 @@ export const loginStatusSlice = createSlice({
   reducers: {
     updateLoginStatus: (state, action) => {
       state.isLoggedIn = action.payload;
+      localStorage.setItem("logInStatus", JSON.stringify(action.payload));
     },
   },
 });

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+// import { authFunctions } from "../HelperFiles/firebaseAuthFunctions";
 
 const SignInForm = (props) => {
   const changeFormType = props.changeFormType;
@@ -7,6 +8,8 @@ const SignInForm = (props) => {
   const initFormState = {
     email: "",
     password: "",
+    isValid: false,
+    validationError: "",
   };
   const [formState, setFormState] = useState(initFormState);
   const [showPassword, setShowPassword] = useState(false);
@@ -21,6 +24,31 @@ const SignInForm = (props) => {
   const toggleShowPassword = (e) => {
     e.preventDefault();
     setShowPassword(!showPassword);
+  };
+  const formValidator = () => {
+    if (formState.email.trim().length === 0) {
+      setFormState({
+        ...formState,
+        isValid: false,
+        validationError: "Please enter a valid email",
+      });
+    } else if (formState.password.length < 8) {
+      setFormState({
+        ...formState,
+        isValid: false,
+        validationError:
+          "Please enter a password of length greater than or equal to 8",
+      });
+    } else {
+      setFormState({ ...formState, isValid: true, validationError: null });
+    }
+  };
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    formValidator();
+    if (formState.isValid) {
+      console.log("IsValid");
+    }
   };
   return (
     <>
@@ -61,10 +89,19 @@ const SignInForm = (props) => {
           <h6 className="text-end">Forgot Password?</h6>
         </div>
 
-        <button className="btn btn-primary mt-3 form-control">Sign In</button>
+        <input
+          type={"submit"}
+          value="Sign In"
+          className="btn btn-primary mt-3 form-control"
+          onClick={(e) => {
+            onFormSubmit(e);
+          }}
+        />
+
         <button
           className="btn btn-success mt-3 form-control "
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             changeFormType(SIGN_UP);
           }}
         >
