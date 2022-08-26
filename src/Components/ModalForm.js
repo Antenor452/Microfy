@@ -19,10 +19,20 @@ const ModalForm = (props) => {
   //Form Type Update
   const FormType = () => {
     if (formType === "SIGN_UP") {
-      return <SignUpForm changeFormType={changeFormType} />;
+      return (
+        <SignUpForm
+          changeFormType={changeFormType}
+          updateIsLoggedIn={updateIsLoggedIn}
+        />
+      );
     }
     if (formType === "SIGN_IN") {
-      return <SignInForm changeFormType={changeFormType} />;
+      return (
+        <SignInForm
+          changeFormType={changeFormType}
+          updateIsLoggedIn={updateIsLoggedIn}
+        />
+      );
     }
     return "Error :no type selected";
   };

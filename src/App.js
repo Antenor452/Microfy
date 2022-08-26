@@ -15,10 +15,12 @@ const App = () => {
       setIsSignedIn(true);
     }
     setIsSignedIn(false);
+    console.log(isSignedIn);
   }, [logInStatus]);
 
   const updateIsLoggedIn = (state) => {
     setIsSignedIn(state);
+    localStorage.setItem("isLoggedIn", JSON.stringify(state));
   };
   return (
     <React.Fragment>

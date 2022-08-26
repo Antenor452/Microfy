@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import UrlForm from "../Components/UrlForm";
 import { db } from "../HelperFiles/firebaseSetup";
 import { addDoc, collection } from "firebase/firestore";
-import { v4 as uuidv4 } from "uuid";
 import shortUUID from "short-uuid";
 import CopyToClipboard from "../Components/CopyToClipboard";
 import ModalForm from "../Components/ModalForm";

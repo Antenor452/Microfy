@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 
 export default class authFunctions {
-  createAccount = (username, email, password) => {
+  static createAccount = (username, email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -19,8 +19,7 @@ export default class authFunctions {
         });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.Message;
+        return error;
       });
   };
 

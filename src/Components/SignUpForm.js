@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import authFunctions from "../HelperFiles/firebaseAuthFunctions";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm = (props) => {
   //Static//
@@ -8,16 +9,17 @@ const SignUpForm = (props) => {
   const initFormState = {
     email: "",
     password: "",
-    confirmPassword: "",
     username: "",
   };
   //
   //Props//
   const changeFormType = props.changeFormType;
+  const updateIsLoggedIn = props.updateIsLoggedIn;
   //
   //Component state and functions//
   const [formState, setFormState] = useState(initFormState);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   //
   //Form onchange handler//
   const onChangeHandler = (e) => {
@@ -32,7 +34,19 @@ const SignUpForm = (props) => {
     e.preventDefault();
     setShowPassword(!showPassword);
   };
+  //
+  //onForm Submit //
+  const onSubmit = (e) => {
+    e.preventDefault();
 
+    authFunctions.createAccount(
+      formState.username,
+      formState.email,
+      formState.password
+    );
+    updateIsLoggedIn(true);
+    navigate("/Home");
+  };
   //Return://
   return (
     <>
@@ -81,7 +95,10 @@ const SignUpForm = (props) => {
           </div>
         </div>
 
-        <button className="btn btn-primary mt-3 form-control">
+        <button
+          className="btn btn-primary mt-3 form-control"
+          onClick={(e) => onSubmit(e)}
+        >
           Create Account
         </button>
         <button
