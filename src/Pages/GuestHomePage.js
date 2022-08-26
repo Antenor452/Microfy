@@ -7,7 +7,8 @@ import shortUUID from "short-uuid";
 import CopyToClipboard from "../Components/CopyToClipboard";
 import ModalForm from "../Components/ModalForm";
 
-const GuestHomePage = () => {
+const GuestHomePage = (props) => {
+  const updateIsLoggedIn = props.updateIsLoggedIn;
   const [url, setUrl] = useState("http://");
   const [microUrl, setMicroUrl] = useState(null);
   const [showLink, setShowLink] = useState(false);
@@ -81,7 +82,11 @@ const GuestHomePage = () => {
         </div>
       </div>
       {modalStatus.showModal ? (
-        <ModalForm type={modalStatus.type} closeModal={closeModal} />
+        <ModalForm
+          type={modalStatus.type}
+          closeModal={closeModal}
+          updateIsLoggedIn={updateIsLoggedIn}
+        />
       ) : null}
     </>
   );

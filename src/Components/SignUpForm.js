@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import authFunctions from "../HelperFiles/firebaseAuthFunctions";
 
 const SignUpForm = (props) => {
-  const changeFormType = props.changeFormType;
+  //Static//
   const SIGN_IN = "SIGN_IN";
   const initFormState = {
     email: "",
@@ -10,20 +11,29 @@ const SignUpForm = (props) => {
     confirmPassword: "",
     username: "",
   };
+  //
+  //Props//
+  const changeFormType = props.changeFormType;
+  //
+  //Component state and functions//
   const [formState, setFormState] = useState(initFormState);
   const [showPassword, setShowPassword] = useState(false);
-
+  //
+  //Form onchange handler//
   const onChangeHandler = (e) => {
     setFormState({
       ...formState,
       [e.target.name]: e.target.value,
     });
   };
-
+  //
+  //toggleShowPassword//
   const toggleShowPassword = (e) => {
     e.preventDefault();
     setShowPassword(!showPassword);
   };
+
+  //Return://
   return (
     <>
       <form>

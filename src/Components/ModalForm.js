@@ -3,10 +3,20 @@ import "../styling/modalstyling.css";
 import SignUpForm from "./SignUpForm";
 import SignInForm from "./SignInForm";
 const ModalForm = (props) => {
+  //Props
+  const updateIsLoggedIn = props.updateIsLoggedIn;
   const type = props.type;
-  const [formType, setFormType] = useState(type);
   const closeModal = props.closeModal;
 
+  //Component state and functions
+  const [formType, setFormType] = useState(type);
+  //
+  //Form onChangeHandler
+  const changeFormType = (formType) => {
+    setFormType(formType);
+  };
+  //
+  //Form Type Update
   const FormType = () => {
     if (formType === "SIGN_UP") {
       return <SignUpForm changeFormType={changeFormType} />;
@@ -17,10 +27,8 @@ const ModalForm = (props) => {
     return "Error :no type selected";
   };
 
-  const changeFormType = (formType) => {
-    setFormType(formType);
-  };
-
+  //
+  //Return :
   return (
     <>
       <div className="container  vh-100 d-flex justify-content-center align-items-center">
