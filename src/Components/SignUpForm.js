@@ -45,7 +45,7 @@ const SignUpForm = (props) => {
       formState.password
     );
     updateIsLoggedIn(true);
-    navigate("/Home");
+    navigate("/");
   };
   //Return://
   return (

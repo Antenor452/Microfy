@@ -1,23 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import GuestHomePage from "./Pages/GuestHomePage";
-import HomePage from "./Pages/HomePage";
 import Redirect from "./Pages/Redirect";
 import Error from "./Pages/Error";
+import HomeWrapper from "./Components/HomeWrapper";
 
 const App = () => {
   const logInStatus = JSON.parse(localStorage.getItem("isLoggedIn"));
   const [isSignedIn, setIsSignedIn] = useState(logInStatus);
-  useEffect(() => {
-    console.log(logInStatus);
-    if (logInStatus) {
-      setIsSignedIn(true);
-    }
-    setIsSignedIn(false);
-    console.log(isSignedIn);
-  }, [logInStatus]);
-
   const updateIsLoggedIn = (state) => {
     setIsSignedIn(state);
     localStorage.setItem("isLoggedIn", JSON.stringify(state));
@@ -30,11 +20,10 @@ const App = () => {
             <Route
               path="/"
               element={
-                isSignedIn ? (
-                  <HomePage updateIsLoggedIn={updateIsLoggedIn} />
-                ) : (
-                  <GuestHomePage updateIsLoggedIn={updateIsLoggedIn} />
-                )
+                <HomeWrapper
+                  isSignedIn={logInStatus}
+                  updateIsLoggedIn={updateIsLoggedIn}
+                />
               }
             />
             <Route path="/guest-:uid" element={<Redirect />} />
