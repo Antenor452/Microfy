@@ -34,7 +34,7 @@ export default class authFunctions {
       });
   };
 
-  logOut = () => {
+  static logOut = () => {
     signOut(auth)
       .then(() => {})
       .catch((error) => {

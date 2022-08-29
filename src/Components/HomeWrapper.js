@@ -11,7 +11,7 @@ const HomeWrapper = (props) => {
   return (
     <>
       {isSignedIn ? (
-        <HomePage />
+        <HomePage updateIsLoggedIn={updateIsLoggedIn} />
       ) : (
         <GuestHomePage updateIsLoggedIn={updateIsLoggedIn} />
       )}
