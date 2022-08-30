@@ -1,30 +1,41 @@
 import React, { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-// import { authFunctions } from "../HelperFiles/firebaseAuthFunctions";
+import { useNavigate } from "react-router-dom";
+import authFunctions from "../HelperFiles/firebaseAuthFunctions";
+import { auth } from "../HelperFiles/firebaseSetup";
 
 const SignInForm = (props) => {
-  const changeFormType = props.changeFormType;
+  //
+  //final
   const SIGN_UP = "SIGN_UP";
+  const navigate = useNavigate;
   const initFormState = {
     email: "",
     password: "",
     isValid: false,
     validationError: "",
   };
+  //
+  //Props
+  const changeFormType = props.changeFormType;
+  const updateIsLoggedIn = props.updateIsLoggedIn;
+  //
+  //Component State and functions
   const [formState, setFormState] = useState(initFormState);
   const [showPassword, setShowPassword] = useState(false);
-
+  //Onchange
   const onChangeHandler = (e) => {
     setFormState({
       ...formState,
       [e.target.name]: e.target.value,
     });
   };
-
+  //toglle show password
   const toggleShowPassword = (e) => {
     e.preventDefault();
     setShowPassword(!showPassword);
   };
+  //validateForm
   const formValidator = () => {
     if (formState.email.trim().length === 0) {
       setFormState({
@@ -43,13 +54,19 @@ const SignInForm = (props) => {
       setFormState({ ...formState, isValid: true, validationError: null });
     }
   };
+  //onFormSubmit
   const onFormSubmit = (e) => {
     e.preventDefault();
-    formValidator();
-    if (formState.isValid) {
-      console.log("IsValid");
-    }
+    authFunctions.signIn(formState.email, formState.password);
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        updateIsLoggedIn(true);
+        navigate("/");
+      }
+    });
   };
+  //
+  //Return
   return (
     <>
       <form>

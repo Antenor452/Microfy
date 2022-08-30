@@ -23,7 +23,7 @@ export default class authFunctions {
       });
   };
 
-  signIn = (email, password) => {
+  static signIn = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential;
