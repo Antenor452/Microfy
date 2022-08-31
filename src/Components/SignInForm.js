@@ -14,6 +14,7 @@ const SignInForm = (props) => {
     password: "",
     isValid: false,
     validationError: "",
+    showPassword: false,
   };
   //
   //Props
@@ -22,7 +23,6 @@ const SignInForm = (props) => {
   //
   //Component State and functions
   const [formState, setFormState] = useState(initFormState);
-  const [showPassword, setShowPassword] = useState(false);
   //Onchange
   const onChangeHandler = (e) => {
     setFormState({
@@ -33,10 +33,11 @@ const SignInForm = (props) => {
   //toglle show password
   const toggleShowPassword = (e) => {
     e.preventDefault();
-    setShowPassword(!showPassword);
+    setFormState({ ...formState, showPassword: !formState.showPassword });
   };
   //validateForm
-  const formValidator = () => {
+  const formValidator = (e) => {
+    e.preventDefault();
     if (formState.email.trim().length === 0) {
       setFormState({
         ...formState,
@@ -86,7 +87,7 @@ const SignInForm = (props) => {
           <label htmlFor="password">Password</label>
           <div className="input-group">
             <input
-              type={showPassword ? "text" : "password"}
+              type={formState.showPassword ? "text" : "password"}
               className="form-control"
               name="password"
               value={formState.password}
@@ -97,7 +98,11 @@ const SignInForm = (props) => {
                 className="btn-show-pass"
                 onClick={(e) => toggleShowPassword(e)}
               >
-                {!showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+                {!formState.showPassword ? (
+                  <AiFillEye />
+                ) : (
+                  <AiFillEyeInvisible />
+                )}
               </button>
             </span>
           </div>
@@ -117,8 +122,7 @@ const SignInForm = (props) => {
 
         <button
           className="btn btn-success mt-3 form-control "
-          onClick={(e) => {
-            e.preventDefault();
+          onClick={() => {
             changeFormType(SIGN_UP);
           }}
         >

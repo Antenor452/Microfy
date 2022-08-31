@@ -103,7 +103,8 @@ const SignUpForm = (props) => {
         </button>
         <button
           className="btn btn-success mt-3 form-control"
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             changeFormType(SIGN_IN);
           }}
         >

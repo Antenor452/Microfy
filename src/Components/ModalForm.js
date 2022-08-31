@@ -3,6 +3,10 @@ import "../styling/modalstyling.css";
 import SignUpForm from "./SignUpForm";
 import SignInForm from "./SignInForm";
 const ModalForm = (props) => {
+  //
+  //Final
+  const SIGN_IN = "SIGN_IN";
+  const SIGN_UP = "SIGN_UP";
   //Props
   const updateIsLoggedIn = props.updateIsLoggedIn;
   const type = props.type;
@@ -16,28 +20,29 @@ const ModalForm = (props) => {
     setFormType(formType);
   };
   //
-  //Form Type Update
-  const FormType = () => {
-    if (formType === "SIGN_UP") {
-      return (
-        <SignUpForm
-          changeFormType={changeFormType}
-          updateIsLoggedIn={updateIsLoggedIn}
-        />
-      );
+  const FormTypeWrapper = (props) => {
+    const formType = props.formType;
+    switch (formType) {
+      case SIGN_IN:
+        return (
+          <SignInForm
+            updateIsLoggedIn={updateIsLoggedIn}
+            changeFormType={changeFormType}
+          />
+        );
+        break;
+      case SIGN_UP:
+        return (
+          <SignUpForm
+            updateIsLoggedIn={updateIsLoggedIn}
+            changeFormType={changeFormType}
+          />
+        );
+        break;
+      default:
+        return <h5>Form type invalid</h5>;
     }
-    if (formType === "SIGN_IN") {
-      return (
-        <SignInForm
-          changeFormType={changeFormType}
-          updateIsLoggedIn={updateIsLoggedIn}
-        />
-      );
-    }
-    return "Error :no type selected";
   };
-
-  //
   //Return :
   return (
     <>
@@ -49,7 +54,7 @@ const ModalForm = (props) => {
           }}
         ></div>
         <div className="container form-container d-flex justify-content-center p-2 align-items-center">
-          {<FormType />}
+          <FormTypeWrapper formType={formType} />
         </div>
       </div>
     </>
