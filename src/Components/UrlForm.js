@@ -1,26 +1,16 @@
 import React, { useState, useRef } from "react";
+import formValidation from "../HelperFiles/formValidation";
 
 const UrlForm = (props) => {
+  const isUrlValid = formValidation.isUrlValid;
+
   const { url, onChangeHandler, onSubmit } = props;
   const [error, setError] = useState(false);
   const inputRef = useRef(null);
 
-  const validateUrl = () => {
-    var urlPattern = new RegExp(
-      "^(https?:\\/\\/)?" + // validate protocol
-        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // validate domain name
-        "((\\d{1,3}\\.){3}\\d{1,3}))" + // validate OR ip (v4) address
-        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // validate port and path
-        "(\\?[;&a-z\\d%_.~+=-]*)?" + // validate query string
-        "(\\#[-a-z\\d_]*)?$",
-      "i"
-    );
-    return !!urlPattern.test(url);
-  };
-
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (validateUrl()) {
+    if (isUrlValid(url)) {
       setError(false);
       onSubmit();
     } else {
