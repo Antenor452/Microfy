@@ -69,6 +69,7 @@ const SignUpForm = (props) => {
             id="username"
             name="username"
             value={formState.username}
+            required
             onChange={(e) => onChangeHandler(e)}
           />
         </div>
