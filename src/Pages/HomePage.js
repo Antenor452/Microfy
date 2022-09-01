@@ -13,10 +13,7 @@ const HomePage = (props) => {
   const fetchUser = async () => {
     setUser(auth.currentUser);
   };
-  useEffect(() => {
-    fetchUser();
-    console.log(user);
-  }, [user]);
+
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import authFunctions from "../HelperFiles/firebaseAuthFunctions";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../HelperFiles/firebaseSetup";
 
 const SignUpForm = (props) => {
   //Static//
@@ -16,6 +17,16 @@ const SignUpForm = (props) => {
   const changeFormType = props.changeFormType;
   const updateIsLoggedIn = props.updateIsLoggedIn;
   //
+  //Useeffect
+  useEffect(() => {
+    const unsubcribe = auth.onAuthStateChanged((userCredential) => {
+      if (userCredential) {
+        updateIsLoggedIn(true);
+        navigate("/");
+      }
+    });
+    return () => unsubcribe();
+  }, []);
   //Component state and functions//
   const [formState, setFormState] = useState(initFormState);
   const [showPassword, setShowPassword] = useState(false);
@@ -44,8 +55,6 @@ const SignUpForm = (props) => {
       formState.email,
       formState.password
     );
-    updateIsLoggedIn(true);
-    navigate("/");
   };
   //Return://
   return (
