@@ -9,10 +9,6 @@ const HomePage = (props) => {
   //Props
   const updateIsLoggedIn = props.updateIsLoggedIn;
   const navigate = useNavigate();
-  const [user, setUser] = useState();
-  const fetchUser = async () => {
-    setUser(auth.currentUser);
-  };
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
