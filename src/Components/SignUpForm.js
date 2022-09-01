@@ -96,6 +96,7 @@ const SignUpForm = (props) => {
         </div>
 
         <button
+          type="submit"
           className="btn btn-primary mt-3 form-control"
           onClick={(e) => onSubmit(e)}
         >

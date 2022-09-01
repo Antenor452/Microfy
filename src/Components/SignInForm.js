@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import authFunctions from "../HelperFiles/firebaseAuthFunctions";
@@ -21,6 +21,18 @@ const SignInForm = (props) => {
   const changeFormType = props.changeFormType;
   const updateIsLoggedIn = props.updateIsLoggedIn;
   //
+  //
+  //UseEffect/
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        updateIsLoggedIn(true);
+        navigate("/");
+      } else {
+      }
+    });
+    return () => unsubscribe();
+  }, []);
   //Component State and functions
   const [formState, setFormState] = useState(initFormState);
   //Onchange
@@ -59,12 +71,6 @@ const SignInForm = (props) => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     authFunctions.signIn(formState.email, formState.password);
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        updateIsLoggedIn(true);
-        navigate("/");
-      }
-    });
   };
   //
   //Return
@@ -111,18 +117,19 @@ const SignInForm = (props) => {
           <h6 className="text-end">Forgot Password?</h6>
         </div>
 
-        <input
-          type={"submit"}
-          value="Sign In"
+        <button
           className="btn btn-primary mt-3 form-control"
           onClick={(e) => {
             onFormSubmit(e);
           }}
-        />
+        >
+          Sign In
+        </button>
 
         <button
           className="btn btn-success mt-3 form-control "
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             changeFormType(SIGN_UP);
           }}
         >
