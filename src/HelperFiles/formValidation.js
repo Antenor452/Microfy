@@ -9,10 +9,18 @@ var urlPattern = new RegExp(
     "(\\#[-a-z\\d_]*)?$",
   "i"
 );
+var emailPattern =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 class formValidation {
   static isUrlValid = (url) => {
     return !!urlPattern.test(url);
+  };
+  static isEmailValid = (email) => {
+    return email.test(emailPattern);
+  };
+  static isValidPassword = (password) => {
+    return password.length >= 8;
   };
 }
 
