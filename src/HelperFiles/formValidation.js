@@ -19,6 +19,9 @@ class formValidation {
   static isEmailValid = (email) => {
     return email.test(emailPattern);
   };
+  static isUsernameValid = (username) => {
+    return username.length >= 0;
+  };
   static isValidPassword = (password) => {
     return password.length >= 8;
   };
