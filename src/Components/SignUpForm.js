@@ -3,6 +3,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import authFunctions from "../HelperFiles/firebaseAuthFunctions";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../HelperFiles/firebaseSetup";
+import formValidation from "../HelperFiles/formValidation";
 
 const SignUpForm = (props) => {
   //Static//
@@ -14,8 +15,8 @@ const SignUpForm = (props) => {
   };
   //
   //Props//
-  const changeFormType = props.changeFormType;
-  const updateIsLoggedIn = props.updateIsLoggedIn;
+  const { changeFormType, updateIsLoggedIn } = props;
+
   //
   //Useeffect
   useEffect(() => {
@@ -46,15 +47,31 @@ const SignUpForm = (props) => {
     setShowPassword(!showPassword);
   };
   //
+  //Validate Form//
+  const validate = () => {
+    if (!formValidation.isUsernameValid(formState.username)) {
+      console.log("Invalid username");
+      return false;
+    } else if (!formValidation.isEmailValid(formState.email)) {
+      console.log("Invalid email");
+      return false;
+    } else if (!formValidation.isValidPassword(formState.password)) {
+      console.log("Invalid password");
+      return false;
+    }
+    return true;
+  };
+  //
   //onForm Submit //
   const onSubmit = (e) => {
     e.preventDefault();
-
-    authFunctions.createAccount(
-      formState.username,
-      formState.email,
-      formState.password
-    );
+    if (validate()) {
+      authFunctions.createAccount(
+        formState.username,
+        formState.email,
+        formState.password
+      );
+    }
   };
   //Return://
   return (

@@ -9,15 +9,16 @@ var urlPattern = new RegExp(
     "(\\#[-a-z\\d_]*)?$",
   "i"
 );
-var emailPattern =
-  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+var emailPattern = new RegExp(
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+);
 
 class formValidation {
   static isUrlValid = (url) => {
     return !!urlPattern.test(url);
   };
   static isEmailValid = (email) => {
-    return email.test(emailPattern);
+    return !!emailPattern.test(email);
   };
   static isUsernameValid = (username) => {
     return username.length >= 0;
