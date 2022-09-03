@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import authFunctions from "../HelperFiles/firebaseAuthFunctions";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +16,10 @@ const SignUpForm = (props) => {
   //
   //Props//
   const { changeFormType, updateIsLoggedIn } = props;
-
+  //useRef
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const usernameRef = useRef();
   //
   //Useeffect
   useEffect(() => {
@@ -46,19 +49,37 @@ const SignUpForm = (props) => {
     e.preventDefault();
     setShowPassword(!showPassword);
   };
+  ////
+  ///Clear invalid class
+  const clearInvalid = () => {
+    usernameRef.current.classList.remove("is-invalid");
+    emailRef.current.classList.remove("is-invalid");
+    passwordRef.current.classList.remove("is-invalid");
+  };
   //
+  ///add invalid class//
+  //
+
+  const addInvalid = (refToUpdate) => {
+    refToUpdate.current.classList.add("is-invalid");
+    refToUpdate.focus();
+  };
   //Validate Form//
   const validate = () => {
     if (!formValidation.isUsernameValid(formState.username)) {
-      console.log("Invalid username");
+      clearInvalid();
+      addInvalid(usernameRef);
       return false;
     } else if (!formValidation.isEmailValid(formState.email)) {
-      console.log("Invalid email");
+      clearInvalid();
+      addInvalid(emailRef);
       return false;
     } else if (!formValidation.isValidPassword(formState.password)) {
-      console.log("Invalid password");
+      clearInvalid();
+      addInvalid(passwordRef);
       return false;
     }
+    clearInvalid();
     return true;
   };
   //
@@ -86,7 +107,7 @@ const SignUpForm = (props) => {
             id="username"
             name="username"
             value={formState.username}
-            required
+            ref={usernameRef}
             onChange={(e) => onChangeHandler(e)}
           />
         </div>
@@ -98,6 +119,7 @@ const SignUpForm = (props) => {
             id="email"
             name="email"
             value={formState.email}
+            ref={emailRef}
             onChange={(e) => onChangeHandler(e)}
           />
         </div>
@@ -109,6 +131,7 @@ const SignUpForm = (props) => {
               className="form-control"
               name="password"
               value={formState.password}
+              ref={passwordRef}
               onChange={(e) => onChangeHandler(e)}
             />
             <span className="input-group-text">
