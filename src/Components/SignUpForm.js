@@ -62,7 +62,7 @@ const SignUpForm = (props) => {
 
   const addInvalid = (refToUpdate) => {
     refToUpdate.current.classList.add("is-invalid");
-    refToUpdate.focus();
+    refToUpdate.current.focus();
   };
   //Validate Form//
   const validate = () => {

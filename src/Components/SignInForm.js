@@ -17,7 +17,7 @@ const SignInForm = (props) => {
   };
   //UseRef//
   const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+
   //
   //Props
   const changeFormType = props.changeFormType;
@@ -53,7 +53,6 @@ const SignInForm = (props) => {
   ///Clear invalid class
   const clearInvalid = () => {
     emailRef.current.classList.remove("is-invalid");
-    passwordRef.current.classList.remove("is-invalid");
   };
   //
   ///add invalid class//
@@ -61,12 +60,11 @@ const SignInForm = (props) => {
 
   const addInvalid = (refToUpdate) => {
     refToUpdate.current.classList.add("is-invalid");
-    refToUpdate.focus();
+    refToUpdate.current.focus();
   };
   //validateForm
-  const formValidator = (e) => {
-    e.preventDefault();
-    if (!formValidation.isEmailValid) {
+  const formValidator = () => {
+    if (!formValidation.isEmailValid(formState.email)) {
       clearInvalid();
       addInvalid(emailRef);
       return false;
@@ -95,6 +93,7 @@ const SignInForm = (props) => {
             id="email"
             name="email"
             value={formState.email}
+            ref={emailRef}
             onChange={(e) => onChangeHandler(e)}
           />
         </div>
