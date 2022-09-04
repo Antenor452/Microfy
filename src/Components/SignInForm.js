@@ -14,6 +14,8 @@ const SignInForm = (props) => {
     email: "",
     password: "",
     showPassword: false,
+    isError: false,
+    errorType: "",
   };
   //UseRef//
   const emailRef = useRef(null);
@@ -76,7 +78,38 @@ const SignInForm = (props) => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     if (formValidator()) {
-      authFunctions.signIn(formState.email, formState.password);
+      authFunctions
+        .signIn(formState.email, formState.password)
+        .then((error) => {
+          if (error.code) {
+            if (
+              error.code === "auth/wrong-password" ||
+              error.code === "auth/user-not-found"
+            ) {
+              console.log("invalid");
+              clearInvalid();
+              setFormState({
+                ...formState,
+                errorType: "Invalid email or password",
+                isError: true,
+              });
+            } else if (error.code === "auth/network-request-failed") {
+              clearInvalid();
+              setFormState({
+                ...formState,
+                errorType: "network-request-failed",
+                isError: true,
+              });
+            } else if (error.code === "auth/too-many-requests") {
+              clearInvalid();
+              setFormState({
+                ...formState,
+                errorType: "Too many tries,try again later",
+                isError: true,
+              });
+            }
+          }
+        });
     }
   };
   //
@@ -121,6 +154,9 @@ const SignInForm = (props) => {
             </span>
           </div>
         </div>
+        {formState.isError ? (
+          <span className="text-danger">{formState.errorType}</span>
+        ) : null}
         <div className="container mt-2 ">
           <h6 className="text-end">Forgot Password?</h6>
         </div>

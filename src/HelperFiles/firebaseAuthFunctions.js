@@ -25,13 +25,14 @@ export default class authFunctions {
   };
 
   static signIn = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password)
+    return signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
       })
       .catch((error) => {
         console.log(error);
+        return error;
       });
   };
 
