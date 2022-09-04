@@ -12,6 +12,8 @@ const SignUpForm = (props) => {
     email: "",
     password: "",
     username: "",
+    isError: false,
+    errorType: "",
   };
   //
   //Props//
@@ -84,14 +86,25 @@ const SignUpForm = (props) => {
   };
   //
   //onForm Submit //
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      authFunctions.createAccount(
-        formState.username,
-        formState.email,
-        formState.password
-      );
+      authFunctions
+        .createAccount(formState.username, formState.email, formState.password)
+        .then((error) => {
+          console.log(error.code);
+          if (error.code === "auth/email-already-in-use") {
+            setFormState({
+              ...formState,
+              errorType: "email-already-in-use",
+              isError: true,
+            });
+            clearInvalid();
+            addInvalid(emailRef);
+          } else {
+            clearInvalid();
+          }
+        });
     }
   };
   //Return://
@@ -144,7 +157,9 @@ const SignUpForm = (props) => {
             </span>
           </div>
         </div>
-
+        {formState.isError ? (
+          <span className="text-danger">{formState.errorType}</span>
+        ) : null}
         <button
           type="submit"
           className="btn btn-primary mt-3 form-control"

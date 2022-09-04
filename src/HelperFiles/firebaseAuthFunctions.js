@@ -9,16 +9,17 @@ import {
 
 export default class authFunctions {
   static createAccount = (username, email, password) => {
-    createUserWithEmailAndPassword(auth, email, password)
+    return createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         updateProfile(auth.currentUser, {
           displayName: username,
         }).catch((error) => {
-          console.log("Error updating username");
+          return error;
         });
       })
       .catch((error) => {
+        // console.log(error);
         return error;
       });
   };
