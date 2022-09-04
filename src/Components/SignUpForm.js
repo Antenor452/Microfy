@@ -92,17 +92,23 @@ const SignUpForm = (props) => {
       authFunctions
         .createAccount(formState.username, formState.email, formState.password)
         .then((error) => {
-          console.log(error.code);
-          if (error.code === "auth/email-already-in-use") {
-            setFormState({
-              ...formState,
-              errorType: "email-already-in-use",
-              isError: true,
-            });
-            clearInvalid();
-            addInvalid(emailRef);
-          } else {
-            clearInvalid();
+          if (error.code) {
+            if (error.code === "auth/email-already-in-use") {
+              setFormState({
+                ...formState,
+                errorType: "email-already-in-use",
+                isError: true,
+              });
+              clearInvalid();
+              addInvalid(emailRef);
+            } else if (error.code == "auth/network-request-failed") {
+              clearInvalid();
+              setFormState({
+                ...formState,
+                errorType: "network-request-failed",
+                isError: true,
+              });
+            }
           }
         });
     }
