@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import authFunctions from "../HelperFiles/firebaseAuthFunctions";
 import { auth } from "../HelperFiles/firebaseSetup";
+import formValidation from "../HelperFiles/formValidation";
 
 const SignInForm = (props) => {
   //
@@ -12,10 +13,11 @@ const SignInForm = (props) => {
   const initFormState = {
     email: "",
     password: "",
-    isValid: false,
-    validationError: "",
     showPassword: false,
   };
+  //UseRef//
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   //
   //Props
   const changeFormType = props.changeFormType;
@@ -47,30 +49,37 @@ const SignInForm = (props) => {
     e.preventDefault();
     setFormState({ ...formState, showPassword: !formState.showPassword });
   };
+  ////
+  ///Clear invalid class
+  const clearInvalid = () => {
+    emailRef.current.classList.remove("is-invalid");
+    passwordRef.current.classList.remove("is-invalid");
+  };
+  //
+  ///add invalid class//
+  //
+
+  const addInvalid = (refToUpdate) => {
+    refToUpdate.current.classList.add("is-invalid");
+    refToUpdate.focus();
+  };
   //validateForm
   const formValidator = (e) => {
     e.preventDefault();
-    if (formState.email.trim().length === 0) {
-      setFormState({
-        ...formState,
-        isValid: false,
-        validationError: "Please enter a valid email",
-      });
-    } else if (formState.password.length < 8) {
-      setFormState({
-        ...formState,
-        isValid: false,
-        validationError:
-          "Please enter a password of length greater than or equal to 8",
-      });
-    } else {
-      setFormState({ ...formState, isValid: true, validationError: null });
+    if (!formValidation.isEmailValid) {
+      clearInvalid();
+      addInvalid(emailRef);
+      return false;
     }
+    clearInvalid();
+    return true;
   };
   //onFormSubmit
   const onFormSubmit = (e) => {
     e.preventDefault();
-    authFunctions.signIn(formState.email, formState.password);
+    if (formValidator()) {
+      authFunctions.signIn(formState.email, formState.password);
+    }
   };
   //
   //Return
