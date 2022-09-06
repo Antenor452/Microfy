@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState, useRef } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import authFunctions from "../HelperFiles/firebaseAuthFunctions";
 import { auth } from "../HelperFiles/firebaseSetup";
 import formValidation from "../HelperFiles/formValidation";
 
@@ -19,24 +19,8 @@ const SignInForm = (props) => {
   };
   //UseRef//
   const emailRef = useRef(null);
-
-  //
   //Props
   const { changeFormType, updateIsLoggedIn } = props;
-
-  //
-  //
-  //UseEffect/
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        updateIsLoggedIn(true);
-        navigate("/");
-      } else {
-      }
-    });
-    return () => unsubscribe();
-  });
   //Component State and functions
   const [formState, setFormState] = useState(initFormState);
   //Onchange
@@ -78,9 +62,12 @@ const SignInForm = (props) => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     if (formValidator()) {
-      authFunctions
-        .signIn(formState.email, formState.password)
-        .then((error) => {
+      signInWithEmailAndPassword(auth, formState.email, formState.password)
+        .then(() => {
+          updateIsLoggedIn(true);
+          navigate("/");
+        })
+        .catch((error) => {
           if (error.code) {
             if (
               error.code === "auth/wrong-password" ||

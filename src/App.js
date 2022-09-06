@@ -4,10 +4,13 @@ import "./App.css";
 import Redirect from "./Pages/Redirect";
 import Error from "./Pages/Error";
 import HomeWrapper from "./Components/HomeWrapper";
+import { useState } from "react";
 
 const App = () => {
   const logInStatus = JSON.parse(localStorage.getItem("isLoggedIn"));
+  const [isLoggedIn, setIsLoggedIn] = useState(logInStatus);
   const updateIsLoggedIn = (state) => {
+    setIsLoggedIn(state);
     localStorage.setItem("isLoggedIn", JSON.stringify(state));
   };
   return (
@@ -19,7 +22,7 @@ const App = () => {
               path="/"
               element={
                 <HomeWrapper
-                  isSignedIn={logInStatus}
+                  isSignedIn={isLoggedIn}
                   updateIsLoggedIn={updateIsLoggedIn}
                 />
               }

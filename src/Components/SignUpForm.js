@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import authFunctions from "../HelperFiles/firebaseAuthFunctions";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../HelperFiles/firebaseSetup";
 import formValidation from "../HelperFiles/formValidation";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const SignUpForm = (props) => {
   //final//
@@ -24,17 +24,6 @@ const SignUpForm = (props) => {
   const passwordRef = useRef();
   const usernameRef = useRef();
   //
-  //Useeffect
-  useEffect(() => {
-    console.log("start");
-    const unsubcribe = auth.onAuthStateChanged((userCredential) => {
-      if (userCredential) {
-        updateIsLoggedIn(true);
-        navigate("/");
-      }
-    });
-    return () => unsubcribe();
-  });
   //Component state and functions//
   const [formState, setFormState] = useState(initFormState);
   const [showPassword, setShowPassword] = useState(false);
@@ -91,28 +80,60 @@ const SignUpForm = (props) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      authFunctions
-        .createAccount(formState.username, formState.email, formState.password)
-        .then((error) => {
-          if (error.code) {
-            if (error.code === "auth/email-already-in-use") {
-              setFormState({
-                ...formState,
-                errorType: "email-already-in-use",
-                isError: true,
-              });
-              clearInvalid();
-              addInvalid(emailRef);
-            } else if (error.code === "auth/network-request-failed") {
-              clearInvalid();
-              setFormState({
-                ...formState,
-                errorType: "network-request-failed",
-                isError: true,
-              });
-            }
+      createUserWithEmailAndPassword(auth, formState.email, formState.password)
+        .then(() => {
+          updateProfile(auth.currentUser, {
+            displayName: formState.username,
+          })
+            .then(() => {
+              updateIsLoggedIn(true);
+              navigate("/");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          if (error.code === "auth/email-already-in-use") {
+            setFormState({
+              ...formState,
+              errorType: "email-already-in-use",
+              isError: true,
+            });
+            clearInvalid();
+            addInvalid(emailRef);
+          } else if (error.code === "auth/network-request-failed") {
+            clearInvalid();
+            setFormState({
+              ...formState,
+              errorType: "network-request-failed",
+              isError: true,
+            });
           }
         });
+      // authFunctions
+      //   .createAccount(formState.username, formState.email, formState.password)
+      //   .then((error) => {
+      //     if (error) {
+      //       console.log(error);
+      //       if (error.code === "auth/email-already-in-use") {
+      //         setFormState({
+      //           ...formState,
+      //           errorType: "email-already-in-use",
+      //           isError: true,
+      //         });
+      //         clearInvalid();
+      //         addInvalid(emailRef);
+      //       } else if (error.code === "auth/network-request-failed") {
+      //         clearInvalid();
+      //         setFormState({
+      //           ...formState,
+      //           errorType: "network-request-failed",
+      //           isError: true,
+      //         });
+      //       }
+      //     }
+      //   });
     }
   };
   //Return://

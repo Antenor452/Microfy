@@ -1,42 +1,7 @@
 import { auth } from "./firebaseSetup";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  updateProfile,
-  signOut,
-} from "firebase/auth";
+import { sendPasswordResetEmail, signOut } from "firebase/auth";
 
 export default class authFunctions {
-  static createAccount = (username, email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        updateProfile(auth.currentUser, {
-          displayName: username,
-        }).catch((error) => {
-          return error;
-        });
-      })
-      .catch((error) => {
-        // console.log(error);
-        return error;
-      });
-  };
-
-  static signIn = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        console.log(error);
-        return error;
-      });
-  };
-
   static logOut = () => {
     signOut(auth)
       .then(() => {})

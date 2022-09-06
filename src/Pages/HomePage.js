@@ -17,11 +17,6 @@ const HomePage = (props) => {
       if (user) {
         setUser(user);
         setIsLoading(false);
-        console.log("Signed in");
-        console.log(user.email);
-        console.log(user.displayName);
-      } else {
-        console.log("Signed out");
       }
     });
   }, []);
@@ -34,7 +29,7 @@ const HomePage = (props) => {
     return (
       <div>
         <div className="d-flex justify-content-between ms-5 me-5">
-          <h3>Hello,{user.displayName}</h3>
+          <h3>Hello,{user.email}</h3>
           <button className="btn btn-danger mt-2" onClick={logOut}>
             Log Out
           </button>
