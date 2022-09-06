@@ -12,6 +12,7 @@ export default class authFunctions {
     return createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        console.log(user);
         updateProfile(auth.currentUser, {
           displayName: username,
         }).catch((error) => {

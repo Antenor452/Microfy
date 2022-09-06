@@ -7,7 +7,6 @@ import HomeWrapper from "./Components/HomeWrapper";
 
 const App = () => {
   const logInStatus = JSON.parse(localStorage.getItem("isLoggedIn"));
-  const [isSignedIn, setIsSignedIn] = useState(logInStatus);
   const updateIsLoggedIn = (state) => {
     setIsSignedIn(state);
     localStorage.setItem("isLoggedIn", JSON.stringify(state));
