@@ -30,7 +30,7 @@ const ModalForm = (props) => {
             changeFormType={changeFormType}
           />
         );
-        break;
+
       case SIGN_UP:
         return (
           <SignUpForm
@@ -38,7 +38,7 @@ const ModalForm = (props) => {
             changeFormType={changeFormType}
           />
         );
-        break;
+
       default:
         return <h5>Form type invalid</h5>;
     }

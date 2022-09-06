@@ -6,7 +6,7 @@ import { auth } from "../HelperFiles/firebaseSetup";
 import formValidation from "../HelperFiles/formValidation";
 
 const SignUpForm = (props) => {
-  //Static//
+  //final//
   const SIGN_IN = "SIGN_IN";
   const initFormState = {
     email: "",

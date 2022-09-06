@@ -50,8 +50,7 @@ export default class authFunctions {
         console.log("Sent");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.Message;
+        console.log(error);
       });
   };
 }

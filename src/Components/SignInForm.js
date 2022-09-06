@@ -22,8 +22,8 @@ const SignInForm = (props) => {
 
   //
   //Props
-  const changeFormType = props.changeFormType;
-  const updateIsLoggedIn = props.updateIsLoggedIn;
+  const { changeFormType, updateIsLoggedIn } = props;
+
   //
   //
   //UseEffect/
@@ -36,7 +36,7 @@ const SignInForm = (props) => {
       }
     });
     return () => unsubscribe();
-  }, []);
+  }, [updateIsLoggedIn, navigate]);
   //Component State and functions
   const [formState, setFormState] = useState(initFormState);
   //Onchange
