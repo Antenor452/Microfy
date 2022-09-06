@@ -15,6 +15,7 @@ const SignUpForm = (props) => {
     isError: false,
     errorType: "",
   };
+  const navigate = useNavigate();
   //
   //Props//
   const { changeFormType, updateIsLoggedIn } = props;
@@ -25,6 +26,7 @@ const SignUpForm = (props) => {
   //
   //Useeffect
   useEffect(() => {
+    console.log("start");
     const unsubcribe = auth.onAuthStateChanged((userCredential) => {
       if (userCredential) {
         updateIsLoggedIn(true);
@@ -32,11 +34,11 @@ const SignUpForm = (props) => {
       }
     });
     return () => unsubcribe();
-  }, []);
+  }, [updateIsLoggedIn, navigate]);
   //Component state and functions//
   const [formState, setFormState] = useState(initFormState);
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+
   //
   //Form onchange handler//
   const onChangeHandler = (e) => {
@@ -101,7 +103,7 @@ const SignUpForm = (props) => {
               });
               clearInvalid();
               addInvalid(emailRef);
-            } else if (error.code == "auth/network-request-failed") {
+            } else if (error.code === "auth/network-request-failed") {
               clearInvalid();
               setFormState({
                 ...formState,
