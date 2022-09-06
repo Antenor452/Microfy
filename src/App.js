@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Redirect from "./Pages/Redirect";
@@ -8,7 +8,6 @@ import HomeWrapper from "./Components/HomeWrapper";
 const App = () => {
   const logInStatus = JSON.parse(localStorage.getItem("isLoggedIn"));
   const updateIsLoggedIn = (state) => {
-    setIsSignedIn(state);
     localStorage.setItem("isLoggedIn", JSON.stringify(state));
   };
   return (
