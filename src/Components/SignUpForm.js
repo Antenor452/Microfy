@@ -34,7 +34,7 @@ const SignUpForm = (props) => {
       }
     });
     return () => unsubcribe();
-  }, [updateIsLoggedIn, navigate]);
+  });
   //Component state and functions//
   const [formState, setFormState] = useState(initFormState);
   const [showPassword, setShowPassword] = useState(false);

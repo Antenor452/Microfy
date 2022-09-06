@@ -36,7 +36,7 @@ const SignInForm = (props) => {
       }
     });
     return () => unsubscribe();
-  }, [updateIsLoggedIn, navigate]);
+  });
   //Component State and functions
   const [formState, setFormState] = useState(initFormState);
   //Onchange
