@@ -29,7 +29,8 @@ const GuestHomePage = (props) => {
     const uid = shortUUID.uuid();
     try {
       await addDoc(collection(db, "GuestLinks"), {
-        url: uid,
+        uid: uid,
+        url: url,
         visits: 0,
       }).then(() => {
         const microUrl = window.location.href + "guest-" + uid;
@@ -37,6 +38,7 @@ const GuestHomePage = (props) => {
         setShowLink(true);
       });
     } catch (e) {
+      console.log(e.toString());
       console.log("error adding doc");
     }
   };
